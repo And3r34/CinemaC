@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<!--
+	NOTES:
+	1. All tokens are represented by '$' sign in the template.
+	2. You can write your code only wherever mentioned.
+	3. All occurrences of existing tokens will be replaced by their appropriate values.
+	4. Blank lines will be removed automatically.
+	5. Remove unnecessary comments before creating your template.
+-->
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="authoring-tool" content="Adobe_Animate_CC">
+<title>_HTML5 Canvas</title>
+<!-- write your code here -->
+<script src="https://code.createjs.com/1.0.0/createjs.min.js"></script>
+<script src="_HTML5 Canvas.js?1716751039848"></script>
+<script>
+var canvas, stage, exportRoot, anim_container, dom_overlay_container, fnStartAnimation;
+function init() {
+	canvas = document.getElementById("canvas");
+	anim_container = document.getElementById("animation_container");
+	dom_overlay_container = document.getElementById("dom_overlay_container");
+	var comp=AdobeAn.getComposition("AE280316379B18469691AAEB11EB3FDD");
+	var lib=comp.getLibrary();
+	var loader = new createjs.LoadQueue(false);
+	loader.addEventListener("fileload", function(evt){handleFileLoad(evt,comp)});
+	loader.addEventListener("complete", function(evt){handleComplete(evt,comp)});
+	var lib=comp.getLibrary();
+	loader.loadManifest(lib.properties.manifest);
+}
+function handleFileLoad(evt, comp) {
+	var images=comp.getImages();	
+	if (evt && (evt.item.type == "image")) { images[evt.item.id] = evt.result; }	
+}
+function handleComplete(evt,comp) {
+	//This function is always called, irrespective of the content. You can use the variable "stage" after it is created in token create_stage.
+	var lib=comp.getLibrary();
+	var ss=comp.getSpriteSheet();
+	var queue = evt.target;
+	var ssMetadata = lib.ssMetadata;
+	for(i=0; i<ssMetadata.length; i++) {
+		ss[ssMetadata[i].name] = new createjs.SpriteSheet( {"images": [queue.getResult(ssMetadata[i].name)], "frames": ssMetadata[i].frames} )
+	}
+	exportRoot = new lib._HTML5Canvas();
+	stage = new lib.Stage(canvas);
+	stage.enableMouseOver();	
+	//Registers the "tick" event listener.
+	fnStartAnimation = function() {
+		stage.addChild(exportRoot);
+		createjs.Ticker.framerate = lib.properties.fps;
+		createjs.Ticker.addEventListener("tick", stage);
+	}	    
+	//Code to support hidpi screens and responsive scaling.
+	AdobeAn.makeResponsive(false,'both',false,1,[canvas,anim_container,dom_overlay_container]);	
+	AdobeAn.compositionLoaded(lib.properties.id);
+	fnStartAnimation();
+}
+</script>
+<!-- write your code here -->
+</head>
+<body onload="init();" style="margin:0px;">
+	
+	<div style="border: 2px solid rgba(0, 0, 0, 0);background-color: rgb(255, 255, 255);">
+	<center><div><img src="logo.jpeg"><img src=""></div></center>
+	<br><br>
+	<hr style="border: 6px solid;">
+	<br>
+ 
+	<center><div id="animation_container" style="background-color:rgba(255, 255, 255, 1.00); width:1040px; height:400px">
+		<canvas id="canvas" width="1040" height="400" style="position: absolute; display: block; background-color:rgba(255, 255, 255, 1.00);"></canvas>
+		<div id="dom_overlay_container" style="pointer-events:none; overflow:hidden; width:1040px; height:400px; position: absolute; left: 0px; top: 0px; display: block;">
+		</div>
+	</div></center>
+	<br><br>
+	<table>
+        <tr>
+            <td><div style="border: 4px solid rgb(0, 0, 0) ;border-radius: 8px;padding: 10px;"><center><img src="1.jpeg" style="width: 200px;margin-right: 80px; margin-left:80px;">
+            <p>MOUSE LOGITECH G203 COLOR NEGRO LIGHTSYNC GAMING, SENSOR HASTA 8.000 DPI,ILUMINACIÓN RGB, CON 6 BOTONES PROGRAMABLES (910-005790)</p>
+            <button style="background-color: rgb(133, 236, 164);color: rgb(0, 0, 0);
+            border: 2px  rgb(0, 0, 0);padding: 5px;border-radius: 8px;padding: 10px;">$29.00 - S/109.33</button></td></center></div>
+
+            <td><div style="border: 4px solid;border-radius: 8px;padding: 10px;"><center><img src="2.jpeg" style="width: 200px;margin-right: 80px; margin-left:80px;">
+            <p>TECLADO VSG GAMING 60% MECANICO MINTAKA - NEGRO | SWITCH RED | LED-RGB (VG-KM981-BLK-RED)</p>
+            <button style="background-color: rgb(133, 236, 164);color: rgb(0, 0, 0);
+            border: 2px  rgb(0, 0, 0);padding: 5px;border-radius: 8px;padding: 10px;">$19.50 - S/73.52</button></td></center></div>
+
+            <td><div style="border: 4px solid;border-radius: 8px;padding: 10px;"><center><img src="3.jpeg" style="width: 200px;margin-right: 80px; margin-left:80px;">
+            <p>AURICULAR VSG GAMING KUIPER, CON MICROFONO, CONEXION JACK-USB, CONTROL DE VOLUMEN, LUZ LED RGB, ALMOHADILLAS SUAVE, COLOR VERDE (VG-HP811)</p>
+            <button style="background-color: rgb(133, 236, 164);color: rgb(0, 0, 0);
+            border: 2px  rgb(0, 0, 0);padding: 5px;border-radius: 8px;padding: 10px;">$29.00 - S/109.33</button></td></center></div>
+
+            <td><div style="border: 4px solid;border-radius: 8px;padding: 10px;"><center><img src="4.jpeg" style="width: 200px;margin-right: 80px; margin-left:80px;">
+            <p>MONITOR MSI 23.8 PULGADAS, CURVO, IPS, FHD, 75HZ (G243CV)</p><br><br>
+            <button style="background-color: rgb(133, 236, 164);color: rgb(0, 0, 0);
+            border: 2px  rgb(0, 0, 0);padding: 5px;border-radius: 8px;padding: 10px;">$129.00 - S/486.33</button></td></center></div>         
+        </tr>
+        <tr>
+            <td><div style="border: 4px solid;border-radius: 8px;padding: 10px;"><center><img src="5.jpeg" style="width: 200px;margin-right: 80px; margin-left:80px;">
+            <p>TARJETA DE VIDEO MSI GT 710 LP 2GB DDR3 (912-V809-2024) GEFORCE NVIDIA 64 BITS | 1 VENTILADOR</p><br>
+            <button style="background-color: rgb(133, 236, 164);color: rgb(0, 0, 0);
+            border: 2px  rgb(0, 0, 0);padding: 5px;border-radius: 8px;padding: 10px;">$59.50 - S/224.32</button></td></center></div>
+
+            <td><div style="border: 4px solid;border-radius: 8px;padding: 10px;"><center><img src="6.jpeg" style="width: 200px;margin-right: 80px; margin-left:80px;">
+            <p>PLACA MADRE MSI B550M PRO-VDH WIFI (911-7C95-056) SOCKET AM4 | RAM DDR4 BUSS 4400OC MHZ</p><br>
+            <button style="background-color: rgb(133, 236, 164);color: rgb(0, 0, 0);
+            border: 2px  rgb(0, 0, 0);padding: 5px;border-radius: 8px;padding: 10px;">$99.50 - S/375.12</button></td></center></div>
+
+            <td><div style="border: 4px solid;border-radius: 8px;padding: 10px;"><center><img src="7.jpeg" style="width: 200px;margin-right: 80px; margin-left:80px;">
+            <p>CASE GAMBYTE ARMOR FUENTE 600W, CON PANEL ACRILICO, 4 VENTILADORES LED RAINBOW, 1 TIPOC C+ 2 PUERTOS USB, SALIDA DE AUDIO, COLOR NEGRO(CS-G-ARMOR)</p>
+            <button style="background-color: rgb(133, 236, 164);color: rgb(0, 0, 0);
+            border: 2px  rgb(0, 0, 0);padding: 5px;border-radius: 8px;padding: 10px;">$53.00 - S/199.81</button></td></center></div>
+
+            <td><div style="border: 4px solid;border-radius: 8px;padding: 10px;"><center><img src="8.jpeg" style="width: 200px;margin-right: 80px; margin-left:80px;">
+            <p>SISTEMA DE ENFRIAMIENTO LIQUIDO GAMBYTE HYDRO BLASTER HZ120 | ARGB | (HZ-120R-ARGB)</p><br>
+            <button style="background-color: rgb(133, 236, 164);color: rgb(0, 0, 0);
+            border: 2px  rgb(0, 0, 0);padding: 5px;border-radius: 8px;padding: 10px;">$55.00 - S/207.35</button></td></center></div>         
+        </tr>
+        <tr>
+            <td><div style="border: 4px solid;border-radius: 8px;padding: 10px;"><center><img src="9.jpeg" style="width: 200px;margin-right: 80px; margin-left:80px;">
+            <p>PROCESADOR INTEL CORE I9 10850K 3.6GHZ HASTA 5.2GHZ 20MB (BX8070110850K) LGA 1200 | 10 NUCLEOS | C/ GRAFICA UHD 630 | S/COOLER</p><br>
+            <button style="background-color: rgb(133, 236, 164);color: rgb(0, 0, 0);
+            border: 2px  rgb(0, 0, 0);padding: 5px;border-radius: 8px;padding: 10px;">$493.00 - S/1 858.61</button></td></center></div>
+
+            <td><div style="border: 4px solid;border-radius: 8px;padding: 10px;"><center><img src="10.jpeg" style="width: 200px;margin-right: 80px; margin-left:80px;">
+            <p>FUENTE DE PODER SEASONIC 600W (SSR-600RA) ATX | 80 PLUS WHITE | NO MODULAR | NEGRO</p><br>
+            <button style="background-color: rgb(133, 236, 164);color: rgb(0, 0, 0);
+            border: 2px  rgb(0, 0, 0);padding: 5px;border-radius: 8px;padding: 10px;">$56.00 - S/211.12</button></td></center></div>
+
+            <td><div style="border: 4px solid;border-radius: 8px;padding: 10px;"><center><img src="11.jpeg" style="width: 200px;margin-right: 80px; margin-left:80px;">
+            <p>SILLA GAMBYTE PREMIUM ( GI-RGBCHBL-RU ) GAMING | NEGRO | LED -RGB</p><br><br>
+            <button style="background-color: rgb(133, 236, 164);color: rgb(0, 0, 0);
+            border: 2px  rgb(0, 0, 0);padding: 5px;border-radius: 8px;padding: 10px;">$$199.00 - S/750.23</button></td></center></div>
+
+            <td><div style="border: 4px solid;border-radius: 8px;padding: 8px;"><center><img src="12.jpeg" style="width: 200px;margin-right: 80px; margin-left:80px;">
+            <p>MONITOR GAMBYTE 24 PULGADAS, GAMER INFINITY LED FULL HD RESOLUCION 1920 X 1080, 1 PUERTO HDMI 1 VGA 1 DISPLAYPORT, FRECUENCIA 165HZ, 1MS(MT-INFVA24-MB)</p>
+            <button style="background-color: rgb(133, 236, 164);color: rgb(0, 0, 0);
+            border: 2px  rgb(0, 0, 0);padding: 5px;border-radius: 8px;padding: 10px;">$110.00 - S/414.70</button></td></center></div>         
+        </tr>
+        
+        </table>
+        <br><br>
+        <table>
+            <tr>
+                <td><div style="border-radius: 9px ; padding: 2px;margin-right: 900px;margin-left: 100px;"><h3>centrogamerpowerplay@gmail.com</h3></div></td>
+                <td><img src="fb.jpeg" style="width: 50px;margin-right: 10px;"><img src="tw.jpeg" style="width: 50px;margin-right: 10px;"><img src="wasap.jpeg" style="width: 50px;margin-right: 10px;"><img src="ig.jpeg" style="width: 50px;margin-right: 10px;"></td>
+            </tr>
+        </table>
+        </div>
+	</div>
+</body>
+</html>
